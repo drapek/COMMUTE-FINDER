@@ -48,6 +48,17 @@ public class MyArrayList <E> {
 
     }
 
+    /*
+        @return negative value if can't find this object in collection
+     */
+    public int getIndex(E whichObject ) {
+        for(int i = 0 ; i < size; i++) {
+            if( collection[i].equals(whichObject) )
+                return i;
+        }
+        return -1;
+    }
+
     public int getSize() {
         return size;
     }
