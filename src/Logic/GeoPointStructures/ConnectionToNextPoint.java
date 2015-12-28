@@ -11,7 +11,7 @@ public class ConnectionToNextPoint {
     private double velocity;
     private double timeTravel;
 
-    ConnectionToNextPoint(MapPoint destPoint, double distnace, double velocity) throws CantBeNegativeException {
+    public ConnectionToNextPoint(MapPoint destPoint, double distnace, double velocity) throws CantBeNegativeException {
         if( destPoint == null )
             throw new NullPointerException();
         if( distnace < 0 )
@@ -24,6 +24,8 @@ public class ConnectionToNextPoint {
         this.velocity = velocity;
         this.timeTravel = distnace * velocity;
     }
+
+
 
     public int getId() {
         return connectionPoint.getId();

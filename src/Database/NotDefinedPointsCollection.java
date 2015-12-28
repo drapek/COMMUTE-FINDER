@@ -36,6 +36,9 @@ public class NotDefinedPointsCollection {
         @return null if object not found
      */
     public static MapPoint searchByName(String name) {
+        if (name.equals(""))
+                return null;
+
         for(int i = 0; i < notDefinedPointsArrayList.getSize(); i++ ) {
             MapPoint tmpPoint = notDefinedPointsArrayList.get(i);
             if( (tmpPoint.getName()).equals(name))

@@ -41,6 +41,8 @@ public class MapPointTest {
     @Test
     public void testEditinigNotDefinedPoints() throws Exception {
         MapPoint notDefined = MapPoint.getNotDefinedMapPoint(34, "Naboo");
+
+        //powinno edytować
         MapPoint editorNotDefinedPoint = MapPoint.getMapPointObject(34, "NewName", 234);
 
         //orginal object must have this properties
@@ -57,6 +59,7 @@ public class MapPointTest {
     public void testAutoIdAssigning() throws Exception {
         MapPoint myMapPoint = MapPoint.getMapPointObject(-1, "Andrzej", 234);
         Assert.assertTrue("Nie nastąpiło automatyczne przypisanie ID", myMapPoint.getId() > 0);
+        System.out.println("automatycznie przypisane id: " + myMapPoint.getId());
     }
 
     @Test
@@ -72,8 +75,30 @@ public class MapPointTest {
             // it's ok because there can't be two notDefinedPoints which the same name!
         }
 
+    }
 
+    @Test
+    public void testaddingConnections() throws Exception {
+        MapPoint tmp1 = MapPoint.getMapPointObject(50, "Dunkan", 200);
 
+        MapPoint dest1 = MapPoint.getMapPointObject(51, "Wadowice", 100);
+        MapPoint dest2 = MapPoint.getMapPointObject(52, "Andrzejów", 200);
+        MapPoint dest3 = MapPoint.getMapPointObject(53, "Gierlach", 300);
+
+        System.out.println("##########Przed dodaniem punktów: \n" + tmp1);
+
+        ConnectionToNextPoint tmpConnection = new ConnectionToNextPoint(dest1, 50, 80);
+        tmp1.addConnection(tmpConnection);
+
+        tmpConnection = new ConnectionToNextPoint(dest2, 100, 80);
+        tmp1.addConnection(tmpConnection);
+
+        tmpConnection = new ConnectionToNextPoint(dest3, 73, 120);
+        tmp1.addConnection(tmpConnection);
+
+        System.out.println("#########po dodaniu pkt: \n" + tmp1);
+
+        Assert.assertEquals(3, tmp1.getConnections().getSize());
 
     }
 
