@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<points>
+
+   <mapPoint id="1">
+      <name>Warszawa</name>
+      <pauseTime>100</pauseTime>
+      <connections>
+        <connection>
+           <destId>2</destId>
+           <destName>Wrocałw</destName>
+	   <distance>590</distance>
+           <velocity>150</velocity>
+        </connection>
+        <connection>
+           <destId>3</destId>
+           <destName></destName>
+	   <distance>450</distance>
+           <velocity>80</velocity>
+        </connection>
+        <connection>
+           <destId>5</destId>
+           <destName>Gdańsk</destName>
+	   <distance>500</distance>
+           <velocity>100</velocity>
+        </connection>
+      </connections>
+   </mapPoint>
+
+  <mapPoint id="2">
+      <name>Wrocław</name>
+      <pauseTime>80</pauseTime>
+      <connections>
+        <connection>
+           <destId>1</destId>
+	   <distance>590</distance>
+           <velocity>150</velocity>
+        </connection>
+        <connection>
+           <destId>4</destId>
+           <destName>Szczecin</destName>
+	   <distance>332</distance>
+           <velocity>92</velocity>
+        </connection>
+      </connections>
+   </mapPoint>
+
+  <mapPoint id="3">
+      <name>Kraków</name>
+      <pauseTime>70</pauseTime>
+      <connections>
+        <connection>
+           <destId>2</destId>
+           <destName>Wrocław</destName>
+	   <distance>300</distance>
+           <velocity>100</velocity>
+        </connection>
+      </connections>
+   </mapPoint>
+
+  <mapPoint id="4">
+      <name>Szczecin</name>
+      <connections>
+        <connection>
+           <destId>1</destId>
+	   <distance>800</distance>
+           <velocity>60</velocity>
+        </connection>
+      </connections>
+   </mapPoint>
+   
+  <mapPoint id="5">
+      <name>Gdańsk</name>
+      <pauseTime>50</pauseTime>
+      <connections>
+        <connection>
+           <destId>4</destId>
+           <destName>Szczecin</destName>
+	   <distance>659</distance>
+           <velocity>70</velocity>
+        </connection>
+        <connection>
+           <destId>1</destId>
+           <destName>Warszawa</destName>
+	   <distance>500</distance>
+           <velocity>100</velocity>
+        </connection>
+      </connections>
+   </mapPoint>
+</points>

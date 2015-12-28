@@ -69,4 +69,10 @@ public class GeneralPointsCollection {
 
     }
 
+    public static void  printDatabase() {
+        for( int i = 0; i < generalCollection.getSize(); i++) {
+            System.out.println(generalCollection.get(i));
+        }
+    }
+
 }

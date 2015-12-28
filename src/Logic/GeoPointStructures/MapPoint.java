@@ -37,7 +37,7 @@ public class MapPoint {
         GeneralPointsCollection.addPoint(this);
     }
 
-    private MapPoint(int id, String name) throws CantBeNegativeException, NameAlreadyExistException, IdAlreadyExistException {
+    private MapPoint(int id, String name) throws NameAlreadyExistException, IdAlreadyExistException {
         if( id <= 0 )
             id = GeneralPointsCollection.nextFreeId();
 
@@ -93,7 +93,7 @@ public class MapPoint {
     }
 
     //needed when we must create connection, but given object not yet exist
-    public static MapPoint getNotDefinedMapPoint(int id, String name) throws CantBeNegativeException, NameAlreadyExistException, NotDefinedPointWithThisIdExistException, NotDefinedPointWithThisNameExistException, IdAlreadyExistException {
+    public static MapPoint getNotDefinedMapPoint(int id, String name) throws NameAlreadyExistException, NotDefinedPointWithThisIdExistException, NotDefinedPointWithThisNameExistException, IdAlreadyExistException {
         MapPoint notDefined = new MapPoint(id, name);
         NotDefinedPointsCollection.addNotDefinedPoint(notDefined);
         return notDefined;
@@ -103,14 +103,17 @@ public class MapPoint {
         @return null if can't find
      */
     private static MapPoint checkIfPointNotExistAsNotDefined(int id, String name) {
-        MapPoint result = NotDefinedPointsCollection.searchById(id);
+        MapPoint result = null;
+        if( id > 0)
+            result = NotDefinedPointsCollection.searchById(id);
+
         if( result != null )
             return result;
-        result = NotDefinedPointsCollection.searchByName(name);
-        if( result != null)
-            return result;
 
-        return null;
+        result = NotDefinedPointsCollection.searchByName(name);
+
+        return result;
+
     }
 
     private static void editNotDefinedObject(MapPoint whatEdit, int id, String name, double pauseTime) {
