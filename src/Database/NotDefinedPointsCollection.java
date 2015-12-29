@@ -58,4 +58,31 @@ public class NotDefinedPointsCollection {
         }
         return null;
     }
+
+    public static boolean searchByExistion(MapPoint elem) {
+        if( elem == null)
+            throw new NullPointerException("NotDefinedDB - serach by existions dostało pusty element do wyszukania!");
+
+        for( int i = 0; i < notDefinedPointsArrayList.getSize(); i++) {
+            if(elem.equals(notDefinedPointsArrayList.get(i)))
+                return true;
+        }
+
+        return false;
+    }
+
+    public static String DBtoString() {
+        StringBuilder strBld = new StringBuilder();
+        for(int i = 0; i < notDefinedPointsArrayList.getSize(); i++) {
+            strBld.append("---NotDefined Point---\n")
+                    .append("\t id: " ).append(notDefinedPointsArrayList.get(i).getId()).append("\n")
+                    .append("\t name: ").append(notDefinedPointsArrayList.get(i).getId()).append("\n\n");
+        }
+
+        String result = strBld.toString();
+        if ( result.equals(""))
+            return "\t brak";
+        else
+            return result;
+    }
 }

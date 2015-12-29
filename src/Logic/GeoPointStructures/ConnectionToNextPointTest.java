@@ -20,7 +20,7 @@ public class ConnectionToNextPointTest {
         Assert.assertEquals(100.0, testConnection.getPauseTime());
         Assert.assertEquals(20.0, testConnection.getDistance());
         Assert.assertEquals(10.0, testConnection.getVelocity());
-        Assert.assertEquals(200.0, testConnection.getTimeTravel());
+        Assert.assertEquals(2.0, testConnection.getTimeTravel());
 
     }
 

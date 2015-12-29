@@ -36,6 +36,29 @@ public class UniversalStackTest {
         } catch (Exception e) {
             //it's ok
         }
+    }
+
+    @Test
+    public void testcopyActualStackAsArrayList() throws Exception {
+        UniversalStack <Integer> tempStack = new UniversalStack<>();
+
+        tempStack.push(1);
+        tempStack.push(6);
+        tempStack.push(8);
+        tempStack.push(12);
+        tempStack.push(19);
+
+        MyArrayList tempArray = tempStack.copyActualStackAsArrayList();
+
+        Assert.assertEquals(5, tempArray.getSize());
+
+        Assert.assertEquals(1 ,tempArray.get(0));
+        Assert.assertEquals(6 ,tempArray.get(1));
+        Assert.assertEquals(8 ,tempArray.get(2));
+        Assert.assertEquals(12 ,tempArray.get(3));
+        Assert.assertEquals(19 ,tempArray.get(4));
+
+        Assert.assertNotSame(tempStack.getStackDataBase(), tempStack);
 
 
     }

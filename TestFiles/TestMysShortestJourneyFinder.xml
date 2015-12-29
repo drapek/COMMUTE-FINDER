@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<points>
+
+   <mapPoint id="1">
+      <pauseTime>2</pauseTime>
+    <connection>
+        <destId>4</destId>
+        <distance>45</distance>
+        <velocity>40</velocity>
+    </connection>
+    <connection>
+        <destId>2</destId>
+        <distance>40</distance>
+        <velocity>50</velocity>
+    </connection>
+   </mapPoint>
+
+    <mapPoint id="2">
+        <pauseTime>20</pauseTime>
+        <connection>
+            <destId>1</destId>
+            <distance>40</distance>
+            <velocity>50</velocity>
+        </connection>
+        <connection>
+            <destId>4</destId>
+            <distance>41</distance>
+            <velocity>60</velocity>
+        </connection>
+        <connection>
+            <destId>3</destId>
+            <distance>30</distance>
+            <velocity>41</velocity>
+        </connection>
+    </mapPoint>
+
+    <mapPoint id="3">
+        <pauseTime>10</pauseTime>
+        <connection>
+            <destId>2</destId>
+            <distance>30</distance>
+            <velocity>41</velocity>
+        </connection>
+    </mapPoint>
+
+    <mapPoint id="4">
+        <pauseTime>11</pauseTime>
+        <connection>
+            <destId>3</destId>
+            <distance>20</distance>
+            <velocity>60</velocity>
+        </connection>
+        <connection>
+            <destId>2</destId>
+            <distance>41</distance>
+            <velocity>60</velocity>
+        </connection>
+    </mapPoint>
+
+</points>

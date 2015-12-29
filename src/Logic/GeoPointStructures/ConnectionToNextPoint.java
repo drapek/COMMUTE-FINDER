@@ -22,7 +22,7 @@ public class ConnectionToNextPoint {
         this.connectionPoint = destPoint;
         this.distnace = distnace;
         this.velocity = velocity;
-        this.timeTravel = distnace * velocity;
+        this.timeTravel = distnace / velocity;
     }
 
 
@@ -46,5 +46,7 @@ public class ConnectionToNextPoint {
     }
 
     public double getTimeTravel() { return timeTravel; }
+
+    public MapPoint getPoint() { return connectionPoint; }
 
 }
