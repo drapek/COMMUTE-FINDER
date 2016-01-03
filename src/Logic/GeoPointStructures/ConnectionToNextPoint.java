@@ -22,7 +22,10 @@ public class ConnectionToNextPoint {
         this.connectionPoint = destPoint;
         this.distnace = distnace;
         this.velocity = velocity;
-        this.timeTravel = distnace / velocity;
+        this.timeTravel = 0;
+        /* fuse for dividing by 0 */
+        if( velocity != 0)
+            this.timeTravel = distnace / velocity;
     }
 
 

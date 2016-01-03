@@ -5,26 +5,30 @@ import DrapekCollections.MyArrayList;
 import DrapekCollections.UniversalStack;
 import Logic.GeoPointStructures.ConnectionToNextPoint;
 import Logic.GeoPointStructures.MapPoint;
+import Logic.GeoPointStructures.PathTimings;
 import ProjectExceptions.CantBeNegativeException;
+
+import java.util.Arrays;
 
 /**
  * Created by drapek on 27.12.15.
  */
 public class MyShortestJourneyFinder {
     private UniversalStack <ConnectionToNextPoint> actualJourneyPath;
-    private MyArrayList <MyArrayList> foundPathList;
+    private MyArrayList <MyArrayList <ConnectionToNextPoint>> foundPathList;
+    private PathTimings [] timings;
+
     private int debugNmbOfInvokesFunction = 0;
     private static final boolean DEBUG = false;
 
-    public MyShortestJourneyFinder() {
-        actualJourneyPath = new UniversalStack<>();
-        foundPathList = new MyArrayList<>();
-    }
 
-    public MyArrayList findShortestPath(MapPoint startPoint, MapPoint endPoint) {
+    public String findShortestPath(MapPoint startPoint, MapPoint endPoint) {
         if( startPoint == null || endPoint == null) {
             throw new NullPointerException("Jako punkt startowy bądź docelowy podałeś wartość pustą!");
         }
+
+        actualJourneyPath = new UniversalStack<>();
+        foundPathList = new MyArrayList<>();
 
         /* wraping startPoint into fiction connection so it can fits to stack */
         ConnectionToNextPoint startPointWrapper = null;
@@ -40,16 +44,26 @@ public class MyShortestJourneyFinder {
             System.exit(1);
         }
 
+        /* searching paths algorithm */
         recurseEndPointFinder(startPointWrapper, endPoint);
 
-        return foundPathList;
 
-        //TODO compute timing of paths
-        //TODO sort by shortest time
-        //TODO return arraylist with shortest conenction
-        //return null;
+        timings = new PathTimings[foundPathList.getSize()];
+        calculateTimings(timings);
+
+        Arrays.sort(timings);
+
+        /* prepare answer */
+        String result = "";
+        if( timings.length != 0)
+            result = printSpecifiedConnection(timings[0]);
+        else
+            result = "  Brak połączenia między podanymi punktami! Przepraszamy :(";
+
+        return result;
 
     }
+
 
     private void recurseEndPointFinder(ConnectionToNextPoint actualSearchPoint, MapPoint endPoint) {
         if(DEBUG)
@@ -98,6 +112,29 @@ public class MyShortestJourneyFinder {
         return false;
     }
 
+    private void calculateTimings(PathTimings [] whereToStore) {
+        for(int i = 0; i < foundPathList.getSize(); i++) {
+            MyArrayList <ConnectionToNextPoint> actualPath = foundPathList.get(i);
+            double totalJourneyTime = addAllTimesInPath(actualPath);
+            whereToStore[i] = new PathTimings(totalJourneyTime, actualPath);
+        }
+    }
+
+    /* method to help counting time for method calculateTimings */
+    private double addAllTimesInPath(MyArrayList <ConnectionToNextPoint> actual) {
+        double result = 0;
+        for( int j = 0; j < actual.getSize(); j++) {
+            ConnectionToNextPoint temp = actual.get(j);
+            result += temp.getTimeTravel();
+
+            /* because the first and last points time pause doesn't count */
+            if(j != 0 && j != actual.getSize() - 1)
+                result += temp.getPauseTime();
+
+        }
+        return result;
+    }
+
     public String printAllFoundConnections() {
         StringBuilder strBld = new StringBuilder();
 
@@ -108,8 +145,6 @@ public class MyShortestJourneyFinder {
             for( int j = 0; j < path.getSize(); j++) {
                 MapPoint unwrapPoint = path.get(j).getPoint();
                 if( j != 0) {
-                    /*strBld.append("  --[").append(path.get(j).getDistance()).append("/").append(path.get(j).getVelocity()).append("=")
-                            .append(path.get(j).getTimeTravel()).append("(time)]-->  ");*/
                     strBld.append("  --[").append(String.format("%.3f", path.get(j).getTimeTravel())).append("]-->  ");
                 }
 
@@ -123,4 +158,43 @@ public class MyShortestJourneyFinder {
 
         return strBld.toString();
     }
+
+    public String printFoundConnectionsSortedByTime() {
+        StringBuilder strBld = new StringBuilder();
+        for( int i = 0; i < timings.length; i++ ) {
+            PathTimings oneConnectin = timings[i];
+            strBld.append("\t").append(i + 1).append(".");
+
+            strBld.append(printSpecifiedConnection(oneConnectin));
+        }
+
+        return strBld.toString();
+    }
+
+    private String printSpecifiedConnection(PathTimings whichConnectionPrint) {
+        StringBuilder strBld = new StringBuilder();
+
+            strBld.append(" (total: ").append(String.format("%.3f", whichConnectionPrint.getTotalTime())).append(") ");
+
+            MyArrayList <ConnectionToNextPoint> path = whichConnectionPrint.getPathReference();
+            for( int j = 0; j < path.getSize(); j++) {
+                MapPoint unwrapPoint = path.get(j).getPoint();
+                if( j != 0) {
+                    strBld.append("  --[").append(String.format("%.3f", path.get(j).getTimeTravel())).append("]-->  ");
+                }
+
+                strBld.append(unwrapPoint.getId());
+                /* pause time for first and last point doesn't count*/
+                if( j != 0 && j != path.getSize() - 1)
+                    strBld.append(" (pause: ").append(unwrapPoint.getPauseTime()).append(")");
+
+                if( !unwrapPoint.getName().equals(""))
+                    strBld.append("(name: ").append(unwrapPoint.getName()).append(" )");
+            }
+
+            strBld.append("\n");
+
+        return strBld.toString();
+    }
+
 }
