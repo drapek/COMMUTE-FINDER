@@ -139,8 +139,6 @@ public class PointsReader {
             }
         }
 
-        System.out.println("#############Print wczytanych danych##########");
-        GeneralPointsCollection.printDatabase();
     }
 
     private int convertId(String nmb) {

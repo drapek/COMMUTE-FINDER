@@ -207,7 +207,7 @@ public class MyShortestJourneyFinder {
             if(i != foundPathList.getSize() - 1)
                 strBld.append(" -> ");
         }
-        strBld.append("\nCzas podróży: ").append(shortestPath.getTotalTime()).append("\n");
+        strBld.append("\nCzas podróży: ").append(String.format("%.3f", shortestPath.getTotalTime())).append("\n");
 
         return strBld.toString();
     }

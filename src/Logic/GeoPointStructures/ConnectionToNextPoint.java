@@ -11,21 +11,21 @@ public class ConnectionToNextPoint {
     private double velocity;
     private double timeTravel;
 
-    public ConnectionToNextPoint(MapPoint destPoint, double distnace, double velocity) throws CantBeNegativeException {
+    public ConnectionToNextPoint(MapPoint destPoint, double distance, double velocity) throws CantBeNegativeException {
         if( destPoint == null )
             throw new NullPointerException();
-        if( distnace < 0 )
+        if( distance < 0 )
             throw new CantBeNegativeException("Dystans nie może być ujemny!");
         if( velocity < 0 )
             throw new CantBeNegativeException("Prędkośc nie może być ujemna!");
 
         this.connectionPoint = destPoint;
-        this.distnace = distnace;
+        this.distnace = distance;
         this.velocity = velocity;
         this.timeTravel = 0;
         /* fuse for dividing by 0 */
         if( velocity != 0)
-            this.timeTravel = distnace / velocity;
+            this.timeTravel = distance / velocity;
     }
 
 
@@ -52,4 +52,13 @@ public class ConnectionToNextPoint {
 
     public MapPoint getPoint() { return connectionPoint; }
 
+    public void testingSetDistanceAndVelocity(double distance, double velocity) {
+        this.distnace = distance;
+        this.velocity = velocity;
+
+        this.timeTravel = 0;
+        /* fuse for dividing by 0 */
+        if( velocity != 0)
+            this.timeTravel = distance / velocity;
+    }
 }

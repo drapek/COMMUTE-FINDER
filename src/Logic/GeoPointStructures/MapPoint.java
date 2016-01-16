@@ -167,4 +167,8 @@ public class MapPoint {
         return strBuild.toString();
     }
 
+    public void testingSetPauseTime( double pauseTime ) {
+        this.pauseTime = pauseTime;
+    }
+
 }

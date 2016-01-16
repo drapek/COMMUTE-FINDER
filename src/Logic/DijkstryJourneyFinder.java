@@ -60,7 +60,7 @@ public class DijkstryJourneyFinder {
         double theLastShortestTime  = -1.0;
         while( notProceedVertices.getSize() > 0 ) {
             try {
-                wrapDijkstryPoint theShortestTimeWrapp = getWrapShortestTimeAtGivenTime(theLastShortestTime);
+                wrapDijkstryPoint theShortestTimeWrapp = getWrapShortestTimeAtGivenTime();
                 deleteWrapperFromNotProceedCollection(theShortestTimeWrapp.originPoint);
                 theLastShortestTime = theShortestTimeWrapp.travelAndStopTime;
 
@@ -80,7 +80,7 @@ public class DijkstryJourneyFinder {
                 }
 
             } catch( Exception e ) {
-                System.err.println(e);
+                e.printStackTrace();
                 System.exit(1);
             }
         }
@@ -119,22 +119,22 @@ public class DijkstryJourneyFinder {
     /**
      *  it takes wrapper with lower travel time, but it can't be lower than @param bottomLimit
      **/
-    private wrapDijkstryPoint getWrapShortestTimeAtGivenTime( double bottomLimit ) throws CantFindTheLowestTimeDijkstry {
+    private wrapDijkstryPoint getWrapShortestTimeAtGivenTime() throws CantFindTheLowestTimeDijkstry {
         wrapDijkstryPoint theLowest = new wrapDijkstryPoint(null, INFINITY_TIME_TRAVEL, null); //assign null wrap which must be overwritten by the lower
 
-        for( wrapDijkstryPoint tempWrap : distanceAndPredecessorTable) {
+        for( int i = 0; i < notProceedVertices.getSize(); i ++) {
+            wrapDijkstryPoint tempWrap = findWrapInCollection(notProceedVertices.get(i));
             //wrap from collection if is infinity it can't be the lower!
             if( tempWrap.travelAndStopTime == INFINITY_TIME_TRAVEL)
                 continue;
-            //we have some bottom limit, so we must check if this time is greater than limit
-            if( tempWrap.travelAndStopTime <= bottomLimit)
-                continue;
+
             //if the theLowest is INFINITY it means that there weren't anny assigments to theLowest yet
             if( theLowest.travelAndStopTime == INFINITY_TIME_TRAVEL)
                 theLowest = tempWrap;
             //and the proper finding the lowest time
             if( tempWrap.travelAndStopTime < theLowest.travelAndStopTime )
                 theLowest = tempWrap;
+
         }
 
         //if it can't finds the lower time
@@ -144,7 +144,6 @@ public class DijkstryJourneyFinder {
         return theLowest;
 
     }
-
 
 
     /* finds wraps of given point */
@@ -178,7 +177,7 @@ public class DijkstryJourneyFinder {
             if(i != anwser.getSize() - 1)
                 strBld.append(" -> ");
         }
-        strBld.append("\nCzas podróży: ").append(journeyTime).append("\n");
+        strBld.append("\nCzas podróży: ").append(String.format("%.3f", journeyTime)).append("\n");
 
         return strBld.toString();
     }

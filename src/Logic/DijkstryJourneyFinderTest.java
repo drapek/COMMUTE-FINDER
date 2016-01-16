@@ -38,6 +38,6 @@ public class DijkstryJourneyFinderTest {
         startPoint = GeneralPointsCollection.searchById(3);
         endPoint = GeneralPointsCollection.searchById(3);
         System.out.println(newFinder.findShortestPath(startPoint, endPoint));
-        Assert.assertEquals("[id: 3 name: ]\nCzas podróży: 0.0\n", newFinder.findShortestPath(startPoint, endPoint));
+        Assert.assertEquals("[id: 3 name: ]\nCzas podróży: 0,000\n", newFinder.findShortestPath(startPoint, endPoint));
     }
 }

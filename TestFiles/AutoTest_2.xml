@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<points>
+    <mapPoint id="1">
+        <pauseTime>0</pauseTime>
+        <name>Grójec</name>
+        <connection>
+            <destId>6</destId>
+            <distance>1</distance>
+            <velocity>1</velocity>
+        </connection>
+    </mapPoint>
+    <mapPoint id="2">
+        <pauseTime>0</pauseTime>
+        <name>Góra Kalwaria</name>
+        <connection>
+            <destId>1</destId>
+            <distance>1</distance>
+            <velocity>1</velocity>
+        </connection>
+    </mapPoint>
+    <mapPoint id="3">
+        <pauseTime>0</pauseTime>
+        <name>Gąbin</name>
+        <connection>
+            <destId>4</destId>
+            <distance>1</distance>
+            <velocity>1</velocity>
+        </connection>
+        <connection>
+            <destId>10</destId>
+            <distance>1</distance>
+            <velocity>1</velocity>
+        </connection>
+    </mapPoint>
+    <mapPoint id="4">
+        <pauseTime>0</pauseTime>
+        <name>Otwock</name>
+        <connection>
+            <destId>2</destId>
+            <distance>1</distance>
+            <velocity>1</velocity>
+        </connection>
+        <connection>
+            <destId>5</destId>
+            <distance>1</distance>
+            <velocity>1</velocity>
+        </connection>
+    </mapPoint>
+    <mapPoint id="5">
+        <pauseTime>0</pauseTime>
+        <name>Karczew</name>
+        <connection>
+            <destId>7</destId>
+            <distance>1</distance>
+            <velocity>1</velocity>
+        </connection>
+    </mapPoint>
+    <mapPoint id="6">
+        <pauseTime>0</pauseTime>
+        <name>Pruszków</name>
+        <connection>
+            <destId>4</destId>
+            <distance>1</distance>
+            <velocity>1</velocity>
+        </connection>
+        <connection>
+            <destId>3</destId>
+            <distance>1</distance>
+            <velocity>1</velocity>
+        </connection>
+    </mapPoint>
+    <mapPoint id="7">
+        <pauseTime>0</pauseTime>
+        <name>Radom</name>
+        <connection>
+            <destId>10</destId>
+            <distance>1</distance>
+            <velocity>1</velocity>
+        </connection>
+    </mapPoint>
+    <connection>
+        <destId>8</destId>
+        <distance>1</distance>
+        <velocity>1</velocity>
+    </connection>
+    <mapPoint id="8">
+        <pauseTime>0</pauseTime>
+        <name>Pułtusk</name>
+        <connection>
+            <destId>7</destId>
+            <distance>1</distance>
+            <velocity>1</velocity>
+        </connection>
+        <connection>
+            <destId>9</destId>
+            <distance>1</distance>
+            <velocity>1</velocity>
+        </connection>
+    </mapPoint>
+    <mapPoint id="9">
+        <pauseTime>0</pauseTime>
+        <name>Płock</name>
+        <connection>
+            <destId>8</destId>
+            <distance>1</distance>
+            <velocity>1</velocity>
+        </connection>
+    </mapPoint>
+    <mapPoint id="10">
+        <pauseTime>0</pauseTime>
+        <name>Żyrardów</name>
+        <connection>
+            <destId>7</destId>
+            <distance>1</distance>
+            <velocity>1</velocity>
+        </connection>
+    </mapPoint>
+</points>
