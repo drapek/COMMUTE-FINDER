@@ -54,11 +54,11 @@ public class MyShortestJourneyFinder {
         Arrays.sort(timings);
 
         /* prepare answer */
-        String result = "";
+        String result;
         if( timings.length != 0)
-            result = printSpecifiedConnection(timings[0]);
+            result = printSimpleInfoAboutConnection(timings[0]);
         else
-            result = "  Brak połączenia między podanymi punktami! Przepraszamy :(";
+            result = "Brak połączenia pomiędzy tymi punktami";
 
         return result;
 
@@ -165,13 +165,13 @@ public class MyShortestJourneyFinder {
             PathTimings oneConnectin = timings[i];
             strBld.append("\t").append(i + 1).append(".");
 
-            strBld.append(printSpecifiedConnection(oneConnectin));
+            strBld.append(printAdvanceSpecifiedConnection(oneConnectin));
         }
 
         return strBld.toString();
     }
 
-    private String printSpecifiedConnection(PathTimings whichConnectionPrint) {
+    private String printAdvanceSpecifiedConnection(PathTimings whichConnectionPrint) {
         StringBuilder strBld = new StringBuilder();
 
             strBld.append(" (total: ").append(String.format("%.3f", whichConnectionPrint.getTotalTime())).append(") ");
@@ -196,5 +196,21 @@ public class MyShortestJourneyFinder {
 
         return strBld.toString();
     }
+
+    /* method which prints connection data in capability with dijkstrij algorithm printing result */
+    private String printSimpleInfoAboutConnection(PathTimings shortestPath) {
+        StringBuilder strBld = new StringBuilder();
+        MyArrayList <ConnectionToNextPoint> foundPathList = shortestPath.getPathReference();
+        for( int i = 0; i < foundPathList.getSize(); i++) {
+            strBld.append("[id: ").append(foundPathList.get(i).getId());
+            strBld.append(" name: ").append(foundPathList.get(i).getName()).append("]");
+            if(i != foundPathList.getSize() - 1)
+                strBld.append(" -> ");
+        }
+        strBld.append("\nCzas podróży: ").append(shortestPath.getTotalTime()).append("\n");
+
+        return strBld.toString();
+    }
+
 
 }

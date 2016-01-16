@@ -75,4 +75,8 @@ public class GeneralPointsCollection {
         }
     }
 
+    public static MyArrayList<MapPoint> getDatabase() {
+        return generalCollection;
+    }
+
 }
