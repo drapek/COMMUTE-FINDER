@@ -16,6 +16,8 @@ public class DijkstryJourneyFinder {
     private double journeyTime = 0.0;
 
     public static final double INFINITY_TIME_TRAVEL = -1.0;
+    public static final int RESULT_CANT_FIND_PATH = 1;
+    public static final int RESULT_ALGORITHM_OK = 0;
 
     private void initializeAlgorithmCollections() {
         //copy all defined points from database to notProccedVertives
@@ -41,22 +43,23 @@ public class DijkstryJourneyFinder {
         wrapDijkstryPoint startWrap = findWrapInCollection(startPoint);
         startWrap.travelAndStopTime = 0;
 
-        dijkstryCoreAlgorithm();
-
-        MyArrayList <MapPoint> anwser = makePointsTraceFromAnwser(startPoint, endPoint);
-        calculateJourneyTime(endPoint);
+        int resultCode = dijkstryCoreAlgorithm();
 
         /* prepare answer */
-        String result = "";
-        if( anwser.getSize() != 0)
+        String result;
+        if( resultCode == RESULT_ALGORITHM_OK || startPoint.equals(endPoint)) {
+            MyArrayList <MapPoint> anwser = makePointsTraceFromAnwser(startPoint, endPoint);
+            calculateJourneyTime(endPoint);
+
             result = formResultPath(anwser);
+        }
         else
-            result = "Brak połączenia pomiędzy tymi punktami";
+            result = "Brak połączenia pomiędzy tymi punktami\n";
 
         return result;
     }
 
-    private void dijkstryCoreAlgorithm() {
+    private int dijkstryCoreAlgorithm() {
         double theLastShortestTime  = -1.0;
         while( notProceedVertices.getSize() > 0 ) {
             try {
@@ -79,11 +82,15 @@ public class DijkstryJourneyFinder {
                     }
                 }
 
-            } catch( Exception e ) {
+            } catch(CantFindTheLowestTimeDijkstry e) {
+                return RESULT_CANT_FIND_PATH;
+            }
+            catch( Exception e ) {
                 e.printStackTrace();
                 System.exit(1);
             }
         }
+        return RESULT_ALGORITHM_OK;
     }
 
     private MyArrayList <MapPoint> makePointsTraceFromAnwser(MapPoint startPoint, MapPoint endPoint) {

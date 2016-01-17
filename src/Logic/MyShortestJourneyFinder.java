@@ -58,7 +58,7 @@ public class MyShortestJourneyFinder {
         if( timings.length != 0)
             result = printSimpleInfoAboutConnection(timings[0]);
         else
-            result = "Brak połączenia pomiędzy tymi punktami";
+            result = "Brak połączenia pomiędzy tymi punktami\n";
 
         return result;
 

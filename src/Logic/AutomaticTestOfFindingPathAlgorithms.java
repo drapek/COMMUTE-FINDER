@@ -12,7 +12,7 @@ import java.util.Random;
  * Created by drapek on 16.01.16.
  */
 public class AutomaticTestOfFindingPathAlgorithms {
-    private final int TEST_NUMBER = 1;
+    private final int TEST_NUMBER = 100;
 
     private double minPause;
     private double maxPause;
@@ -65,7 +65,7 @@ public class AutomaticTestOfFindingPathAlgorithms {
         //read structure to program db
         IOLinux pointReader = new IOLinux();
         //                                           v normaly here is: drawnStructure but you can change on specyfic path
-        pointReader.readXMLFile(filePathToStructures[0]);
+        pointReader.readXMLFile(filePathToStructures[drawnStructure]);
 
         randValuesForStructureParameters();
 
@@ -112,7 +112,7 @@ public class AutomaticTestOfFindingPathAlgorithms {
         }
 
         System.out.println("############ Podsumowanie ###########");
-        System.out.println("znaleziono " + errCounter + " błędów.");
+        System.out.println("znaleziono " + errCounter + " błędów. (" + ((double) errCounter / (double) TEST_NUMBER) * 100 + " %)");
     }
 
     private void randValuesForStructureParameters() {
